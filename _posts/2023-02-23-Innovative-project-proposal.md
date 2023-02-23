@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Innovative Project Proposal
-author: [Richard Kuo]
+author: [PEI JIA HUNG]
 category: [Lecture]
 tags: [jekyll, ai]
 ---
@@ -39,8 +39,8 @@ This homework is to propose an innovative project and describe the key features,
 3. 電子鼻：氣味感測與辨識 MQ2
 
 ### 系統方塊圖
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/FutureHome_kitchen_robot.png?raw=true)
-
+![](https://github.com/peijia0809/MCU-project/blob/main/images/UART-DB9-pinout.png?raw=true)
+<iframe width="1239" height="697" src="https://www.youtube.com/embed/x5Md0yld_bQ" title="(中字) 豐田預備全力投入電動車！耗時三年打造希望再次引領潮流！美最新「鐵鏽電池」為鋰電池七分一價格！未來是否能有效壓低電動車成本？〈蕭若元：理論蕭析〉2023-02-23" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ---
 ## Market Analysis (市場分析)
