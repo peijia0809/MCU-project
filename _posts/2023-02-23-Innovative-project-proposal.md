@@ -20,44 +20,33 @@ This homework is to propose an innovative project and describe the key features,
   - Draw a System Block Diagram
 
 ---
-## 家用料理機器人
+## Smart lighting
 
 ### 應用功能說明
-1. 操作廚具：咖啡機＋果汁機＋烤麵包機＋微波爐+烤箱+氣炸鍋
-2. 存取冰箱：辨識食物, 存放食材，或取出食材, 送至廚具
+•	Smart lighting will become more prevalent, with lights that can be controlled via an app on your smartphone. You will be able to adjust the brightness, color, and even schedule when the lights turn on and off.
+o	Smart lights can be installed in various places in the home, such as living room, room, kitchen, etc. With the installation of smart lights, we can directly use the app on the mobile phone or tablet to control the brightness, color, and switch of the lights without going to press the switch, which is very convenient. It may also be used in other home appliances in the future, such as controlling the air-conditioning switch and temperature adjustment with the app in the mobile phone
+
 
 ### 設計考量與相關技術
 **系統設計考量：**<br>
-1. 操作方式:垂直升降式手臂 or 懸吊式手臂
-2. 移動方式:兩輪 or 滑軌懸吊
-3. 供電方式:鋰電池
-4. 聯網方式:WiFi或BT to 手機
+When designing smart lighting systems, there are several considerations that need to be taken into account, including:
+1.	Purpose: The first consideration when designing smart lighting is the purpose of the lighting. Is it for general illumination, task lighting, or accent lighting? This will help determine the type and number of fixtures required.
+2.	Space: The size and layout of the space will also play a significant role in determining the type and number of fixtures required. Additionally, the placement of the fixtures should be carefully considered to ensure even illumination.
+3.	Energy Efficiency: Smart lighting systems are designed to be energy efficient, and therefore, the type of lighting fixtures and bulbs used should be chosen with energy efficiency in mind.
+4.	Control Systems: Smart lighting systems require advanced control systems that allow the user to adjust the lighting levels and color temperature. These control systems can be integrated into the lighting fixtures or can be installed separately.
+5.	User Experience: The user experience is critical when designing smart lighting systems. The lighting should be easy to control, and the controls should be intuitive and accessible.
+When it comes to relevant technologies required for smart lighting design, the following are essential:
+1.	LED Lighting: LED lighting is highly efficient and is a popular choice for smart lighting systems.
+2.	Sensors: Sensors, such as occupancy sensors and daylight sensors, are used to detect when a space is occupied and when natural light is available. This information is used to adjust the lighting levels accordingly.
+3.	Smart Controllers: Smart controllers are used to manage the lighting system, including adjusting the lighting levels and color temperature. These controllers can be integrated into the lighting fixtures or installed separately.
+4.	Wireless Communication: Smart lighting systems rely on wireless communication to transmit data between the lighting fixtures and control systems. This communication can be done using Bluetooth, Wi-Fi, or Zigbee protocols.
+5.	Artificial Intelligence: Artificial intelligence can be used to analyze data collected by sensors and control systems to optimize the lighting levels and color temperature automatically.
+Overall, when designing smart lighting systems, it's essential to consider the purpose of the lighting, the space, energy efficiency, control systems, and user experience. Additionally, selecting the right technology, such as LED lighting, sensors, smart controllers, wireless communication, and artificial intelligence, is critical to achieving an effective and efficient smart lighting system.
 
-**所需相關技術：**
-1. 滑軌式機器手臂 ＆ 軟式夾具
-2. 食物辨識分類：Jetson-Nano + IMX219
-3. 電子鼻：氣味感測與辨識 MQ2
 
 ### 系統方塊圖
-![](https://github.com/peijia0809/MCU-project/blob/main/images/UART-DB9-pinout.png?raw=true)
-<iframe width="1239" height="697" src="https://www.youtube.com/embed/x5Md0yld_bQ" title="(中字) 豐田預備全力投入電動車！耗時三年打造希望再次引領潮流！美最新「鐵鏽電池」為鋰電池七分一價格！未來是否能有效壓低電動車成本？〈蕭若元：理論蕭析〉2023-02-23" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
----
-## Market Analysis (市場分析)
-![](https://blog.hubspot.com/hs-fs/hubfs/tam-sam-som.png?width=1200&name=tam-sam-som.png)
-
-### TAM of Future Home Products
-The Target Market size (TAM) of Future Home Products is the number of household.<br>
-
-### Taiwan Households = 8.93M (台灣 9百萬戶）
-* [Total number of households in Taiwan from 2010 to 2020(in 1,000s)](https://www.statista.com/statistics/330804/taiwan-national-total-number-of-households/#:~:text=By%20the%20end%20of%202020,households%20in%20the%20previous%20year.)
-
-### Japan Households = 57.2M (日本 5千7百萬戶)
-* [Number of Households in Japan](https://www.helgilibrary.com/indicators/number-of-households/japan/) 
-
-### American Households = 129.93M (美國 1.3億戶)
-* [Number of households in the U.S. from 1960 to 2021(in millions)](https://www.statista.com/statistics/183635/number-of-households-in-the-us/)<br>
-* [The average American household consisted of 2.51 people in 2021.](https://www.statista.com/statistics/183648/average-size-of-households-in-the-us/)<br>
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/%E5%9C%96%E7%89%871.png?raw=true)
+<iframe width="1239" height="697" src="https://www.youtube.com/embed/x5Md0yld_bQ" title="
 
 <br>
 <br>
