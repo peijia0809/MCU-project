@@ -39,7 +39,8 @@ This project is to implement a bluetooth remote controlled robotcar.
 ### 成果展示
 
 Forwar:
-https://youtube.com/shorts/cEgKL3nPrZs?feature=share
+<iframe width="993" height="559" src="https://youtube.com/shorts/cEgKL3nPrZs?feature=share" title="BIGBUG Trailer (2022)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 Bakward:
 https://youtube.com/shorts/D0CN3ujb_G0?feature=share
