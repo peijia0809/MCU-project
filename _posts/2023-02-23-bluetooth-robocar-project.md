@@ -49,6 +49,7 @@ Right:
 https://youtube.com/shorts/8w816KhpTxc?feature=share
 
 Left:
+https://youtu.be/3BkZmkcRrK4
 https://youtube.com/shorts/3BkZmkcRrK4?feature=share
 
 <br>
