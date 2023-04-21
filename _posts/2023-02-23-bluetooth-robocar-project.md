@@ -17,6 +17,8 @@ This project is to implement a bluetooth remote controlled robotcar.
 1. Bluetooth remote control App 
 2. two-wheel robocar
 
+https://youtube.com/shorts/D0CN3ujb_G0?feature=share
+
 ### 設計考量與相關技術
 **系統設計考量：**<br>
 1. 操作方式:藍牙遙控手機App
