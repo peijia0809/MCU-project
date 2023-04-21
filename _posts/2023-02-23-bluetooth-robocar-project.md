@@ -17,7 +17,7 @@ This project is to implement a bluetooth remote controlled robotcar.
 1. Bluetooth remote control App 
 2. two-wheel robocar
 
-https://youtube.com/shorts/D0CN3ujb_G0?feature=share
+
 
 ### 設計考量與相關技術
 **系統設計考量：**<br>
@@ -35,6 +35,20 @@ https://youtube.com/shorts/D0CN3ujb_G0?feature=share
 
 ### 系統方塊圖
 ![](https://github.com/rkuo2000/MCU-course/blob/main/images/FutureHome_kitchen_robot.png?raw=true)
+
+### 成果展示
+
+Forwar:
+https://youtube.com/shorts/cEgKL3nPrZs?feature=share
+
+Bakward:
+https://youtube.com/shorts/D0CN3ujb_G0?feature=share
+
+Right:
+https://youtube.com/shorts/8w816KhpTxc?feature=share
+
+Left:
+https://youtube.com/shorts/3BkZmkcRrK4?feature=share
 
 <br>
 <br>
