@@ -38,7 +38,7 @@ This project is to implement a bluetooth remote controlled robotcar.
 
 ### 成果展示
 
-Forwar:
+Forward:
 <iframe width="329" height="586" src="https://www.youtube.com/embed/cEgKL3nPrZs" title="forward" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Bakward:
