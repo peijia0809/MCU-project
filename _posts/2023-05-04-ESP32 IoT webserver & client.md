@@ -13,7 +13,9 @@ Introduction to IoT Operating Systems
 
 ![](https://github.com/peijia0809/MCU-project/blob/main/_posts/S__97476612.jpg?raw=true)
 
-![]([https://github.com/rkuo2000/MCU-course/blob/main/images/IoT-OS_use_cases.png?raw=true])
+---
+
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/S__97476614.jpg?raw=true)
 
 ---
 ## IoT webserver code
