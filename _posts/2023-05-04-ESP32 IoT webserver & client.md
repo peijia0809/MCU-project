@@ -1,6 +1,6 @@
 ---
 layout: post
-title: IoT OS
+title: ESP32 IoT webserver & client
 author: [Richard Kuo]
 category: [Lecture]
 tags: [jekyll, ai]
@@ -9,112 +9,305 @@ tags: [jekyll, ai]
 Introduction to IoT Operating Systems
 
 ---
-## IoT Operating Systems
-[9 IoT Operating Systems To Use in 2021 [List & Comparison]](https://ubidots.com/blog/iot-operating-systems/)
-* [Contiki](https://www.contiki-ng.org/)
-* [freeRTOS](https://www.freertos.org/)
-* [Mbed OS](https://os.mbed.com/mbed-os/)
-* [MicroPython](https://micropython.org/)
-* [Embedded Linux](https://ubuntu.com/embedded)
-* [RIOT](https://www.riot-os.org/)
-* [Tiny OS](http://www.tinyos.net/)
-* [Windows10 IoT](https://developer.microsoft.com/en-us/windows/iot/)
-* [OpenWrt](https://openwrt.org/)
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/IoT-OS_use_cases.png?raw=true)
+## IoT 
+
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/S__97476612.jpg?raw=true)
+
+![]([https://github.com/rkuo2000/MCU-course/blob/main/images/IoT-OS_use_cases.png?raw=true])
 
 ---
-### [freeRTOS](https://www.freertos.org/)
-![](https://www.freertos.org/fr-content-src/uploads/2018/07/logo-1.jpg)
-Real-time operating system for microcontrollers
+## IoT webserver code
+//
+// ESP32 Webserver to receive data from Webclients
+// To use a web browser to open IP address of this webserver 
+//
+#include <WiFi.h> 
+#include <WebServer.h>
 
-[AWS IoT FreeRTOS使用者指南](https://docs.aws.amazon.com/zh_tw/freertos/archive/202012.00/userguide/what-is-freertos.html)<br>
-**FreeRTOS架構**<br>
-![](https://docs.aws.amazon.com/zh_tw/freertos/archive/202012.00/userguide/images/afreertos-architecture.png)
+const char* ssid     = "Yeh";
+const char* password = "00000000";
+
+WebServer server(80);
+
+const String HTTP_PAGE_HEAD  = "<!DOCTYPE html><html lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\"/><title>{v}</title>";
+const String HTTP_PAGE_STYLE = "<style>.c{text-align: center;} div,input{padding:5px;font-size:1em;}  input{width:90%;}  body{text-align: center;font-family:verdana;} button{border:0;border-radius:0.6rem;background-color:#1fb3ec;color:#fdd;line-height:2.4rem;font-size:1.2rem;width:100%;} .q{float: right;width: 64px;text-align: right;} .button2 {background-color: #008CBA;} .button3 {background-color: #f44336;} .button4 {background-color: #e7e7e7; color: black;} .button5 {background-color: #555555;} .button6 {background-color: #4CAF50;} </style>";
+const String HTTP_PAGE_SCRIPT= "<script>function c(l){document.getElementById('s').value=l.innerText||l.textContent;document.getElementById('p').focus();}</script>";
+const String HTTP_PAGE_BODY  = "</head><body><div style='text-align:left;display:inline-block;min-width:260px;'>";
+const String HTTP_WEBPAGE = HTTP_PAGE_HEAD + HTTP_PAGE_STYLE + HTTP_PAGE_SCRIPT + HTTP_PAGE_BODY;
+
+const String HTTP_PAGE_END = "</div></body></html>";
+
+// DHT22 sensor data
+String dht22_name0 = "Temperature";
+String dht22_name1 = "Humidity";
+String dht22_value0= "0";
+String dht22_value1= "0";
+// HTU21DF sensor data
+String htu21_name0 = "Temperature";
+String htu21_name1 = "Humidity";
+String htu21_value0= "0 ";
+String htu21_value1= "0 ";
+// PM5003 sensor data
+String pm_name0 = "PM1.0";
+String pm_name1 = "PM2.5";
+String pm_name2 = "PM10.0";
+String pm_value0= "0 ug/m3";
+String pm_value1= "0 ug/m3";
+String pm_value2= "0 ug/m3";
+
+void handleRoot() {
+  // Display Sensor Status
+  String s  = HTTP_WEBPAGE;
+         s += "<table border=\"1\"";
+         s += "<tr><th align='center'>DHT22 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+dht22_name0+"</td><td align='center'>"+dht22_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+dht22_name1+"</td><td align='center'>"+dht22_value1+"</td></tr>";
+         s += "<tr><th align='center'>HTU21 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+htu21_name0+"</td><td align='center'>"+htu21_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+htu21_name1+"</td><td align='center'>"+htu21_value1+"</td></tr>";
+         s += "<tr><th align='center'>PM5003 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+pm_name0+"</td><td align='center'>"+pm_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+pm_name1+"</td><td align='center'>"+pm_value1+"</td></tr>";
+         s += "<tr><td align='center'>"+pm_name2+"</td><td align='center'>"+pm_value2+"</td></tr>";               
+         s += "</tr></table>";
+         s += HTTP_PAGE_END;
+         
+  server.send(200, "text/html", s);
+}
+
+// http://192.168.1.12/dht22?T=28&H=50 emulate data from Webclient_DHT22
+//(you can open a browser to test it, too)
+void dht22() {
+  String message = "Number of args received:";
+  message += server.args();                   //Get number of parameters
+  message += "\n";                            //Add a new line
+
+  for (int i = 0; i < server.args(); i++) {
+    message += "Arg "+(String)i + " –> "; //Include the current iteration value
+    message += server.argName(i) + ": ";      //Get the name of the parameter
+    message += server.arg(i) + "\n";          //Get the value of the parameter
+  }
+  Serial.print(message);
+
+  dht22_value0=server.arg(0);
+  dht22_value1=server.arg(1);
+  
+  String s  = HTTP_WEBPAGE;
+         s += "<table border=\"1\"";
+         s += "<tr><th align='center'>DHT22 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+dht22_name0+"</td><td align='center'>"+dht22_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+dht22_name1+"</td><td align='center'>"+dht22_value1+"</td></tr>";
+         s += "<tr><th align='center'>HTU21 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+htu21_name0+"</td><td align='center'>"+htu21_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+htu21_name1+"</td><td align='center'>"+htu21_value1+"</td></tr>";
+         s += "<tr><th align='center'>PM5003 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+pm_name0+"</td><td align='center'>"+pm_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+pm_name1+"</td><td align='center'>"+pm_value1+"</td></tr>";
+         s += "<tr><td align='center'>"+pm_name2+"</td><td align='center'>"+pm_value2+"</td></tr>";          
+         s += "</tr></table>";
+         s += HTTP_PAGE_END; 
+	 
+  server.send(200, "text/html", s);
+}
+
+// http://192.168.1.12/htu21?T=28&H=50 emulate data from Webclient_HTU21
+//(you can open a browser to test it, too)
+void htu21() {
+  String message = "Number of args received:";
+  message += server.args();                   //Get number of parameters
+  message += "\n";                            //Add a new line
+
+  for (int i = 0; i < server.args(); i++) {
+    message += "Arg "+(String)i + " –> "; //Include the current iteration value
+    message += server.argName(i) + ": ";      //Get the name of the parameter
+    message += server.arg(i) + "\n";          //Get the value of the parameter
+  }
+  Serial.print(message);
+
+  htu21_value0=server.arg(0);
+  htu21_value1=server.arg(1);
+  
+  String s  = HTTP_WEBPAGE;
+         s += "<table border=\"1\"";
+         s += "<tr><th align='center'>DHT22 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+dht22_name0+"</td><td align='center'>"+dht22_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+dht22_name1+"</td><td align='center'>"+dht22_value1+"</td></tr>";
+         s += "<tr><th align='center'>HTU21 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+htu21_name0+"</td><td align='center'>"+htu21_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+htu21_name1+"</td><td align='center'>"+htu21_value1+"</td></tr>";
+         s += "<tr><th align='center'>PM5003 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+pm_name0+"</td><td align='center'>"+pm_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+pm_name1+"</td><td align='center'>"+pm_value1+"</td></tr>";
+         s += "<tr><td align='center'>"+pm_name2+"</td><td align='center'>"+pm_value2+"</td></tr>";          
+         s += "</tr></table>";
+         s += HTTP_PAGE_END; 
+   
+  server.send(200, "text/html", s);
+}
+
+// http://192.168.1.12/pm25?pm10=25&pm100=40&pm100=50 emulate data from Webclient_PM5003
+//(you can open a browser to test it, too)
+void pm25() {
+  String message = "Number of args received:";
+  message += server.args();                   //Get number of parameters
+  message += "\n";                            //Add a new line
+
+  for (int i = 0; i < server.args(); i++) {
+    message += "Arg "+(String)i + " –> "; //Include the current iteration value
+    message += server.argName(i) + ": ";      //Get the name of the parameter
+    message += server.arg(i) + "\n";          //Get the value of the parameter
+  }
+  Serial.print(message);
+
+  pm_value0=server.arg(0)+" ug/m3";
+  pm_value1=server.arg(1)+" ug/m3";
+  pm_value2=server.arg(2)+" ug/m3";
+    
+  String s  = HTTP_WEBPAGE;
+         s += "<table border=\"1\"";
+         s += "<tr><th align='center'>DHT22 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+dht22_name0+"</td><td align='center'>"+dht22_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+dht22_name1+"</td><td align='center'>"+dht22_value1+"</td></tr>";
+         s += "<tr><th align='center'>HTU21 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+htu21_name0+"</td><td align='center'>"+htu21_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+htu21_name1+"</td><td align='center'>"+htu21_value1+"</td></tr>";
+         s += "<tr><th align='center'>PM5003 Sensor</th><th align='cener'>value</th></tr>";
+         s += "<tr><td align='center'>"+pm_name0+"</td><td align='center'>"+pm_value0+"</td></tr>";
+         s += "<tr><td align='center'>"+pm_name1+"</td><td align='center'>"+pm_value1+"</td></tr>";
+         s += "<tr><td align='center'>"+pm_name2+"</td><td align='center'>"+pm_value2+"</td></tr>";          
+         s += "</tr></table>";
+         s += HTTP_PAGE_END; 
+   
+  server.send(200, "text/html", s);
+}
+
+void setup() {
+  Serial.begin(115200);
+  
+  // We start by connecting to a WiFi network
+  Serial.println();
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");  
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  server.on("/", handleRoot);
+  server.on("/dht22", dht22);
+  server.on("/htu21", htu21);
+  server.on("/pm25", pm25);  
+  
+  Serial.println("HTTP server started");
+  server.begin();  
+}
+
+void loop() {
+  server.handleClient();
+}
 
 ---
-### Arduino Library: TridentTD_EasyFreeRTOS32
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/Arduino_Library_TridentTD_EasyFreeRTOS32.png?raw=true)
+## IoT client code
 
-### examples> TridentTD_EasyFreeRTOS32 >01.basic_multitask
-[01.basic_multitask](https://github.com/TridentTD/TridentTD_EasyFreeRTOS32/tree/master/example/01.basic_multitask)
+// Webclient to read HTU21DF and send data to Webserver
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <HTTPClient.h>
+#include <Wire.h>
+#include <Adafruit_HTU21DF.h>
 
-### examples> TridentTD_EasyFreeRTOS32 >01.basic_multitask
-[02.advance_multitask](https://github.com/TridentTD/TridentTD_EasyFreeRTOS32/tree/master/example/02.advance_multitask)
+// Connect Vin to 3-5VDC
+// Connect GND to ground
+// Connect SCL to I2C clock pin (A5 on UNO, D1 on NodeMCU)
+// Connect SDA to I2C data pin (A4 on UNO, D2 on NodeMCU)
 
----
-### [RIOT](https://www.riot-os.org/)
-![](https://github.com/RIOT-OS/RIOT/raw/master/doc/doxygen/src/riot-logo.svg)
-RIOT is a real-time multi-threading operating system that supports a range of devices that are typically found in the Internet of Things (IoT): 8-bit, 16-bit and 32-bit microcontrollers.
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/RIOT_introduction.png?raw=true)
-### [RIOT Code](https://github.com/RIOT-OS/RIOT)
-[RIOT Documents](https://doc.riot-os.org/)
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/RIOT_structure.png?raw=true)
+Adafruit_HTU21DF htu = Adafruit_HTU21DF();
 
----
-### [Supported Boards](https://www.riot-os.org/boards.html)
-[RIOT-OS on ESP32 boards](https://doc.riot-os.org/group__cpu__esp32.html)<br>
+const char* ssid     = "Yeh";
+const char* password = "00000000";
+String      webserverIP = "http://172.20.10.4"; // Your Webserver IP address
 
----
-### Toolchain Installation
-**[Standard Setup of Toolchain for Windows](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/windows-setup.html)**<br>
-1. run [ESP-IDF Installer (556.65MB)](https://dl.espressif.com/dl/esp-idf-tools-setup-2.4.exe)
-2. run ESP-IDF Command Prompt / PowerShell
-3. run batch
- - `cd C:/Users/USER/Desktop/esp-idf>`
- - `install.bat`
- - `export.bat`
+void setup() {
+  Serial.begin(115200);
+  Serial.println("HTU21D-F test");  
+  if (!htu.begin()) {
+    Serial.println("Couldn't find HTU21DF sensor!");
+    while (1);
+  }
+  
+  // We start by connecting to a WiFi network
+  Serial.println();
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");  
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+void loop() {
+  delay(5000);
+
+  float temp  = htu.readTemperature();
+  float humid = htu.readHumidity();
+  Serial.print(temp);
+  Serial.print(" ");
+  Serial.print(humid);
+  Serial.println();
+  
+  String url = webserverIP + "/htu21?";
+  url += "T=";
+  url += String(temp);
+  url += "&H=";
+  url += String(humid);
+  
+  if(WiFi.status()== WL_CONNECTED){   //Check WiFi connection status
+
+     WiFiClient client;
+
+     HTTPClient http;    //Declare object of class HTTPClient
  
-**Install ESP-IDF on Ubuntu/Linux OS**<br>
-```
-mkdir -p ~/esp
-cd ~/esp
-git clone --recursive https://github.com/espressif/esp-idf
-cd esp-idf
-./install.sh esp32
-. ./export.sh
-```
-* Setup ESP32 toolchain environment
-```
-cd ~/esp/esp-idf
-. ./export.sh
-```
+     http.begin(client, url);    //Specify request destination
+     http.addHeader("Content-Type", "text/plain");  //Specify content-type header
+ 
+     int httpCode = http.POST("Message from ESP32");   //Send the request
+     String payload = http.getString();                //Get the response payload
+ 
+     Serial.println(httpCode);   //Print HTTP return code
+     Serial.println(payload);    //Print request response payload
 
----
-### Download RIOT
-```
-cd ~
-git clone https://github.com/RIOT-OS/RIOT
-```
+     http.end();  //Close connection
+ 
+   }else{
+      Serial.println("Error in WiFi connection");   
+   }
+  
+  Serial.println();
+  Serial.println("closing connection. going to sleep...");
+  // go to deepsleep for 1 minutes
+  //system_deep_sleep_set_option(0);
+  //system_deep_sleep(1 * 60 * 1000000);
+  delay(1*60*1000);
+}
 
----
-### ESP-IDF freeRTOS example
-[freeRTOS](https://github.com/espressif/esp-idf/tree/master/examples/system/freertos/real_time_stats)<br>
-[real_time_stats_example_main.c](https://github.com/espressif/esp-idf/blob/master/examples/system/freertos/real_time_stats/main/real_time_stats_example_main.c)<br>
-```
-cd ~/esp/esp-idf/examples/system/freertos/real_time_stats
-idf.py build
-idf.py flash -p /dev/ttyUSB0
-```
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/freeRTOS_real_time_stats_monitor.png?raw=true)
-
----
-### RIOT Examples
-[examples](https://github.com/RIOT-OS/RIOT/tree/master/examples)<br>
-[tests](https://github.com/RIOT-OS/RIOT/tree/master/tests)<br>
-`cd ~/RIOT`<br>
-
-* [arduino_hello-world](https://github.com/RIOT-OS/RIOT/tree/master/examples/arduino_hello-world)<br>
-`make flash BOARD=esp32-wroom-32 -C examples/arduino_hello-world /dev/ttyUSB0`<br>
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/RIOT_examples_arduino_hello-world_compilation.png?raw=true)
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/RIOT_examples_arduino_hello-world_monitor.png?raw=true)
-* [blinky](https://github.com/RIOT-OS/RIOT/tree/master/examples/blinky)<br>
-`make flash BOARD=esp32-wroom-32 -C examples/blinky /dev/ttyUSB0`<br>
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/RIOT_examples_blinky_compilation.png?raw=true)
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/RIOT_examples_blinky_monitor.png?raw=true)
-* [thread_basic](https://github.com/RIOT-OS/RIOT/tree/master/tests/thread_basic)<br>
-`make flash BOARD=esp32-wroom-32 -C tests/thread_basic /dev/ttyUSB0`<br>
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/RIOT_tests_thread_basic_compilation.png?raw=true)
-![](https://github.com/rkuo2000/MCU-course/blob/main/images/RIOT_tests_thread_basic_monitor.png?raw=true)
 
 <br>
 <br>
