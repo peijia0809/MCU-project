@@ -1,12 +1,23 @@
 ---
 layout: post
 title: ESP32 IoT webserver & client
-author: [Richard Kuo]
+author: [PEI JIA HUNG]
 category: [Lecture]
 tags: [jekyll, ai]
 ---
 
 Introduction to IoT Operating Systems
+
+---
+
+## Homework Report Format
+**Contents:**<br>
+* **應用與功能說明**
+  - Use I2C interface
+  - Typical humidity accuracy of ±2%
+  - Typical temperature accuracy of ±0.3C
+  - Operates from 0 to 100% humidity but this sensor isn’t recommended for harsh environments where it could come in contact with water (such as rain).
+  - Loading new information to the ESP32 board and sensor using a Wi-Fi connection rather than a serial communication.
 
 ---
 ## IoT 
