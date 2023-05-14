@@ -10,7 +10,8 @@ tags: [jekyll, ai]
 ## Homework Report Format
 **Contents:**<br>
 * **應用與功能說明**
-  - 連接手機熱點並取得IP位置操控ESP 320
+  - 連接手機熱點並取得IP位置操控ESP 32
+  - IP位置為172.20.10.4
 
 ---
 ## 成果展示
