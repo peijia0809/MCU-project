@@ -10,8 +10,8 @@ tags: [jekyll, ai]
 ## Homework Report Format
 **Contents:**<br>
 * **應用與功能說明**
-  - 連接手機熱點並取得IP位置操控ESP 32
-  - IP位置為172.20.10.4
+  - OTA (Over-the-Air) update is the process of loading new firmware to the ESP32 board using a Wi-Fi connection rather than a serial communication.
+  - IP 172.20.10.4
 
 ---
 ## 成果展示
