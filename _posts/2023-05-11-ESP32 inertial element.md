@@ -10,10 +10,12 @@ tags: [jekyll, ai]
 ## Homework Report Format
 **Contents:**<br>
 * **應用與功能說明**
-  - Specify the future home application, and Describe the key features
-  - Describe the key features which may be applied to the home space (kitchen, living room, play room, study room, bed room)
+  - 慣性測量單元是測量物體三軸姿態角以及加速度的裝置。
+一般一個IMU內會裝有三軸的陀螺儀和三個方向的加速度計，來測量物體在三維空間中的角速度和加速度，並以此解算出物體的姿態。
 * **設計考量與所需相關技術**
-  - List all design considerations and the required technologies
+  - The coordinate system and rotation conventions
+  - ![](https://danceswithcode.net/engineeringnotes/rotations_in_3d/images/fig01.png)
+  - ![](https://github.com/rkuo2000/MCU-course/blob/main/images/XYZ-YPR-Euler.png?raw=true)
 * **系統方塊圖**
   - Draw a System Block Diagram
 
