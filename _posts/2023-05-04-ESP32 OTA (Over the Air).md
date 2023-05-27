@@ -13,7 +13,7 @@ tags: [jekyll, ai]
   - OTA (Over-the-Air) update is the process of loading new firmware to the ESP32 board using a Wi-Fi connection rather than a serial communication.
   - IP 172.20.10.4
 * **系統方塊圖**
-  -![](https://github.com/peijia0809/MCU-project/blob/main/_posts/sever.png?raw=true)
+  -![](https://github.com/peijia0809/MCU-project/blob/main/_posts/ESP32%20(2).png?raw=true)
 
 
 ---
