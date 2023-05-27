@@ -10,7 +10,6 @@ Introduction to IoT Operating Systems
 
 ---
 
-## Homework Report Format
 **Contents:**<br>
 * **應用與功能說明**
   - Use I2C interface
@@ -18,6 +17,8 @@ Introduction to IoT Operating Systems
   - Typical temperature accuracy of ±0.3C
   - Operates from 0 to 100% humidity but this sensor isn’t recommended for harsh environments where it could come in contact with water (such as rain).
   - Loading new information to the ESP32 board and sensor using a Wi-Fi connection rather than a serial communication.
+* **系統方塊圖**
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/sever%20&%20client.png?raw=true)
 
 ---
 ## IoT 
