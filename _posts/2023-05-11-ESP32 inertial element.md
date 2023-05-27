@@ -17,7 +17,7 @@ tags: [jekyll, ai]
   - ![](https://danceswithcode.net/engineeringnotes/rotations_in_3d/images/fig01.png)
   - ![](https://github.com/rkuo2000/MCU-course/blob/main/images/XYZ-YPR-Euler.png?raw=true)
 * **系統方塊圖**
-  - Draw a System Block Diagram
+  - 
 
 ---
 ## 成果展示
