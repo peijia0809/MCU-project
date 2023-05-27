@@ -6,48 +6,146 @@ category: [Lecture]
 tags: [jekyll, ai]
 ---
 
-This homework is to propose an innovative project and describe the key features, list all Design Considerations and the required technologies, then draw the System Block Diagram.
+這次的作業是用ESP32接上溫度濕度感測器，再藉由手機熱點上傳至thinkspeak顯示數據
 
 ---
-## Homework Report Format
+
 **Contents:**<br>
 * **應用與功能說明**
-  - Specify the future home application, and Describe the key features
-  - Describe the key features which may be applied to the home space (kitchen, living room, play room, study room, bed room)
+  - 利用溫度濕度感測器偵測數據，並且將數據顯示在thinkspeak的網站上
 * **設計考量與所需相關技術**
-  - List all design considerations and the required technologies
+  - 需要連接手機熱點wifi，才能將數據上傳到thinkspeak
 * **系統方塊圖**
   - Draw a System Block Diagram
 
 ---
-## Smart lighting
+## loT ThinkSpeak
 
 ### 應用功能說明
-•	Smart lighting will become more prevalent, with lights that can be controlled via an app on your smartphone. You will be able to adjust the brightness, color, and even schedule when the lights turn on and off.
-o	Smart lights can be installed in various places in the home, such as living room, room, kitchen, etc. With the installation of smart lights, we can directly use the app on the mobile phone or tablet to control the brightness, color, and switch of the lights without going to press the switch, which is very convenient. It may also be used in other home appliances in the future, such as controlling the air-conditioning switch and temperature adjustment with the app in the mobile phone
-
+利用溫度感測器將溫度濕度數據傳送到ThinkSpeak的網站上
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/346170580_183638597624377_3858830159712200539_n.png?raw=true)
 
 ### 設計考量與相關技術
 **系統設計考量：**<br>
-When designing smart lighting systems, there are several considerations that need to be taken into account, including:
-1.	Purpose: The first consideration when designing smart lighting is the purpose of the lighting. Is it for general illumination, task lighting, or accent lighting? This will help determine the type and number of fixtures required.
-2.	Space: The size and layout of the space will also play a significant role in determining the type and number of fixtures required. Additionally, the placement of the fixtures should be carefully considered to ensure even illumination.
-3.	Energy Efficiency: Smart lighting systems are designed to be energy efficient, and therefore, the type of lighting fixtures and bulbs used should be chosen with energy efficiency in mind.
-4.	Control Systems: Smart lighting systems require advanced control systems that allow the user to adjust the lighting levels and color temperature. These control systems can be integrated into the lighting fixtures or can be installed separately.
-5.	User Experience: The user experience is critical when designing smart lighting systems. The lighting should be easy to control, and the controls should be intuitive and accessible.
-When it comes to relevant technologies required for smart lighting design, the following are essential:
-1.	LED Lighting: LED lighting is highly efficient and is a popular choice for smart lighting systems.
-2.	Sensors: Sensors, such as occupancy sensors and daylight sensors, are used to detect when a space is occupied and when natural light is available. This information is used to adjust the lighting levels accordingly.
-3.	Smart Controllers: Smart controllers are used to manage the lighting system, including adjusting the lighting levels and color temperature. These controllers can be integrated into the lighting fixtures or installed separately.
-4.	Wireless Communication: Smart lighting systems rely on wireless communication to transmit data between the lighting fixtures and control systems. This communication can be done using Bluetooth, Wi-Fi, or Zigbee protocols.
-5.	Artificial Intelligence: Artificial intelligence can be used to analyze data collected by sensors and control systems to optimize the lighting levels and color temperature automatically.
-Overall, when designing smart lighting systems, it's essential to consider the purpose of the lighting, the space, energy efficiency, control systems, and user experience. Additionally, selecting the right technology, such as LED lighting, sensors, smart controllers, wireless communication, and artificial intelligence, is critical to achieving an effective and efficient smart lighting system.
-
+硬體元件：準備一個溫度感測器，以及ESP32
+程式碼軟件：Arduino
+編寫代碼：使用Arduino語言，並將其發送到ThingSpeak的網站上
 
 ### 系統方塊圖
-![](https://github.com/peijia0809/MCU-project/blob/main/_posts/%E5%9C%96%E7%89%871.png?raw=true)
-<iframe width="1239" height="697" src="https://www.youtube.com/embed/x5Md0yld_bQ" title="
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/%E5%9C%96%E7%89%871.png?raw=true)                     
 
+
+### code程式碼
+#include <WiFi.h>
+#include "DHT.h"
+
+#define DHTPIN 19     // NodeMCU pin D6 connected to DHT11 pin Data
+DHT dht(DHTPIN, DHT11, 15);
+
+const char* ssid     = "pj";
+const char* password = "oojj12345";
+
+
+const char* host = "api.thingspeak.com";
+const char* thingspeak_key = "F0HOM6A0TEJTZ5TG";
+
+void turnOff(int pin) {
+  pinMode(pin, OUTPUT);
+  digitalWrite(pin, 1);
+}
+
+void setup() {
+  turnOff(2);
+  turnOff(4);
+  turnOff(5);
+  turnOff(12);
+  turnOff(13);
+  turnOff(14);
+  turnOff(15);
+
+  Serial.begin(115200);
+
+  // disable all output to save power
+  turnOff(0);
+  dht.begin();
+  delay(10);
+  
+
+  // We start by connecting to a WiFi network
+
+  Serial.println();
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");  
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+int value = 0;
+
+void loop() {
+  delay(5000);
+  ++value;
+
+  Serial.print("connecting to ");
+  Serial.println(host);
+  
+  // Use WiFiClient class to create TCP connections
+  WiFiClient client;
+  const int httpPort = 80;
+  if (!client.connect(host, httpPort)) {
+    Serial.println("connection failed");
+    return;
+  }
+
+  String temp = String(dht.readTemperature());
+  String humidity = String(dht.readHumidity());
+  //String voltage = String(system_get_free_heap_size());
+  String url = "/update?key=";
+  url += thingspeak_key;
+  url += "&field1=";
+  url += temp;
+  url += "&field2=";
+  url += humidity;
+  
+  Serial.print("Requesting URL: ");
+  Serial.println(url);
+  
+  // This will send the request to the server
+  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+               "Host: " + host + "\r\n" + 
+               "Connection: close\r\n\r\n");
+  delay(10);
+  
+  // Read all the lines of the reply from server and print them to Serial
+  while(client.available()){
+    String line = client.readStringUntil('\r');
+    Serial.print(line);
+  }
+  
+  Serial.println();
+  Serial.println("closing connection. going to sleep...");
+  delay(1000);
+  // go to deepsleep for 1 minutes
+  //system_deep_sleep_set_option(0);
+  //system_deep_sleep(1 * 60 * 1000000);
+  delay(1*10*1000);
+}
+
+                                                                                                                                                             
+                                                                                         
+                                                                                       
+                                                                                         
 <br>
 <br>
 
