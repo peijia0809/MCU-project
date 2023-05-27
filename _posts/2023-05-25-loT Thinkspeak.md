@@ -32,7 +32,7 @@ tags: [jekyll, ai]
 編寫代碼：使用Arduino語言，並將其發送到ThingSpeak的網站上
 
 ### 系統方塊圖
-![](https://github.com/peijia0809/MCU-project/blob/main/_posts/%E5%9C%96%E7%89%871.png?raw=true)                     
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/thinkspeak.png?raw=true)                     
 
 
 ### code程式碼
