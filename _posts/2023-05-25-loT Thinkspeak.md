@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Innovative Project Proposal
+title: loT Thinkspeak
 author: [PEI JIA HUNG]
 category: [Lecture]
 tags: [jekyll, ai]
