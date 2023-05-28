@@ -16,7 +16,7 @@ tags: [jekyll, ai]
 * **設計考量與所需相關技術**
   - 需要連接手機熱點wifi，才能將數據上傳到thinkspeak
 * **系統方塊圖**
-  - Draw a System Block Diagram
+  - 下方附上
 
 ---
 ## loT ThinkSpeak
