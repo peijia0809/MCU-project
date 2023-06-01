@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 藍牙遙控機器人實作
+title: PID遙控車車
 author: [PEI JIA HUNG]
 category: [Lecture]
 tags: [jekyll, ai]
@@ -9,7 +9,7 @@ tags: [jekyll, ai]
 This project is to implement a bluetooth remote controlled robotcar.
 
 ---
-## 藍牙遙控機器人
+## PID遙控車車
 ![](https://github.com/rkuo2023/MCU-project/blob/main/images/ESP32_RoboCar.jpg?raw=true)
 
 
