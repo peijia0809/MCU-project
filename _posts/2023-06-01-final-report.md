@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 藍牙遙控機器人實作
-author: [Richard Kuo]
+author: [PEI JIA HUNG]
 category: [Lecture]
 tags: [jekyll, ai]
 ---
