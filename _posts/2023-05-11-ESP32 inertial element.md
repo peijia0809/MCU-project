@@ -17,7 +17,7 @@ tags: [jekyll, ai]
   - ![](https://danceswithcode.net/engineeringnotes/rotations_in_3d/images/fig01.png)
   - ![](https://github.com/rkuo2000/MCU-course/blob/main/images/XYZ-YPR-Euler.png?raw=true)
 * **系統方塊圖**
-  - 
+  - ![](https://github.com/peijia0809/MCU-project/blob/main/_posts/%E4%BD%A0%E7%9A%84%E6%AE%B5%E8%90%BD%E6%96%87%E5%AD%97%20(1).png?raw=true)
 
 ---
 ## 成果展示
