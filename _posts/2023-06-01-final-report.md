@@ -9,7 +9,7 @@ tags: [jekyll, ai]
 This project is to implement a bluetooth remote controlled robotcar.
 
 ---
-## PID遙控車車
+## PID遙控小車
 ![](https://github.com/rkuo2023/MCU-project/blob/main/images/ESP32_RoboCar.jpg?raw=true)
 
 
@@ -21,10 +21,10 @@ This project is to implement a bluetooth remote controlled robotcar.
 
 ### 設計考量與相關技術
 **系統設計考量：**<br>
-1. 操作方式:熱點遙控手機App
+1. 操作方式:藍芽遙控
 2. 移動方式:兩輪 
 3. 供電方式:鋰電池 3.7V x2
-4. 聯網方式:熱點
+4. 聯網方式:藍芽
 
 **所需相關技術：**
 1. Arduino IDE 2.1.0
@@ -43,12 +43,6 @@ Forward:
 
 Bakward:
 <iframe width="329" height="586" src="https://www.youtube.com/embed/D0CN3ujb_G0" title="backward" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-Right:
-<iframe width="329" height="586" src="https://www.youtube.com/embed/8w816KhpTxc" title="right" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-Left:
-<iframe width="329" height="586" src="https://www.youtube.com/embed/3BkZmkcRrK4" title="left" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 <br>
 <br>
