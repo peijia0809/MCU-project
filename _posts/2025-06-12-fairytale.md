@@ -12,7 +12,7 @@ This project combines AI and imaging to create fairy tales.
 ## Fairytale
 
 ### EdgeAI MCU System Diagram
-![](https://github.com/user-attachments/assets/a27d865f-c83b-4636-9fb0-c2d84e3920d7](https://github.com/peijia0809/MCU-project/blob/main/_posts/fairytale%E7%B3%BB%E7%B5%B1%E6%96%B9%E5%A1%8A%E5%9C%96.png?raw=true)
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/fairytale%E7%B3%BB%E7%B5%B1%E6%96%B9%E5%A1%8A%E5%9C%96.png?raw=true)
 
 
 ### Introduciton of EdgeAI MCU Application projects 
