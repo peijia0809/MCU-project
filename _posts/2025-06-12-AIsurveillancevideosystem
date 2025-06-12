@@ -1,0 +1,123 @@
+---
+layout: post
+title: AI surveillance video system
+author: [Richard Kuo]
+category: [Lecture]
+tags: [ai]
+---
+
+AI surveillance video system
+
+
+---
+## AI surveillance video system
+
+### EdgeAI MCU System Diagram
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/ai%E7%9B%A3%E8%A6%96.png?raw=true)
+
+
+### Introduciton of EdgeAI MCU Application projects 
+1) capture image per minute and send to Gemini Vision (1分鐘拍一張)
+
+2) if replied text has no change, then dont store the jpg and text
+
+    if replied text are different from the previous scene, then store the jpg and text 
+
+    (use date+time for the filename)
+
+
+
+### GenAI coding Design Flow
+
+**1. System Initialization**
+Initialize Hardware:
+
+Set up the AMB82-mini MCU.
+
+Initialize camera module to capture images at regular intervals.
+
+Set up SD card for storage.
+
+Initialize the RTC (Real-Time Clock) for timestamp generation.
+
+Configure Gemini Vision API for image analysis.
+
+**2. Image Capture and Processing (GenAIVision.ino)**
+Capture Image:
+
+Configure the camera to capture an image every minute using the millis() function or a hardware timer.
+
+Store the captured image on the SD card temporarily.
+
+Send Image to Gemini Vision:
+
+Send the captured image to the Gemini Vision API for analysis.
+
+Wait for Gemini Vision to process the image and return the text response.
+
+Text Comparison:
+
+Retrieve the text response from Gemini Vision.
+
+Compare it with the previous response stored in memory.
+
+If the text has not changed, discard the image and response.
+
+If the text is different, proceed to the next step.
+
+**3. Store Image and Text (CaptureJPG_SDcard.ino)**
+Store Image and Response:
+
+Create a filename using the current date and time (e.g., image_YYYYMMDD_HHMMSS.jpg).
+
+Store the image and the corresponding text on the SD card.
+
+Update the previous response to the latest one.
+
+**4. Testing and Validation**
+Run and Validate:
+
+Run the code to capture images every minute.
+
+Test by checking if only new responses (with different text) lead to storing new images and text.
+
+Ensure timestamps are correctly generated and filenames are unique.
+
+**5. Code Flow Summary:**
+Every minute, the MCU captures an image.
+
+The image is sent to Gemini Vision for analysis.
+
+If the text response is new, the image and text are saved with a timestamp-based filename.
+
+If the text has not changed, no new files are stored.
+
+### Prompts for Code Generation
+Prompt:
+Sample codes:
+1. GenAIVision.ino
+2. CaptureJPG_SDcard.ino
+3. examples > AmebaRTC > Simple_RTC.ino
+合併程式碼符合題目需求
+1) capture image per minute and send to Gemini Vision (1 分鐘拍一張)
+2) if replied text has no change, then dont store the jpg and text
+if replied text are different from the previous scene, then store the jpg and text
+(use date+time for the filename)
+
+### Demo and Testing
+<iframe width="482" height="857" src="https://www.youtube.com/embed/mqmCTe4TfB4" title="fairytale" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### Conclusion
+本專案「Fairytale Teller」利用 AMB82-mini 開發板及 Realtek RTL8735B MCU，成功實現了按下按鈕後捕捉圖片，並將圖片傳送至 Gemini-Vision 進行AI故事生成。AI返回的故事文本經過拆分成多個短句後，再將這些短句發送至 Google-TTS 進行語音合成，避免了長字串生成 MP3 文件的問題。整體系統運行順暢，能夠有效提升語音播放的流暢性與準確性，達到了預期的功能目標，未來可進一步優化故事生成與語音播放的同步效果。
+
+
+
+
+
+<br>
+<br>
+
+*This site was last updated {{ site.time | date: "%B %d, %Y" }}.*
+
+
+
