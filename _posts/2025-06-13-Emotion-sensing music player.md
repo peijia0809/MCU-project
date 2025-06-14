@@ -65,6 +65,7 @@ Prompt:
 
 
 ### Code
+
 /*
     Emotion-to-MP3 Player with Gemini Vision
     功能：
@@ -94,8 +95,7 @@ VideoSetting config(768, 768, CAM_FPS, VIDEO_JPEG, 1);
 uint32_t img_addr = 0;
 uint32_t img_len = 0;
 const int buttonPin = 1;
-String prompt_msg = &quot;請判斷這張圖片代表的情緒，如果是喜輸出APT, 怒輸出
-AstroBunny, 哀輸出gTTS, 樂輸出IBelieve&quot;;
+String prompt_msg = &quot;請判斷這張圖片代表的情緒，如果是喜輸出APT, 怒輸出AstroBunny, 哀輸出gTTS, 樂輸出IBelieve&quot;;
 #define TFT_RESET 5
 #define TFT_DC    4
 #define TFT_CS    SPI_SS
