@@ -53,7 +53,8 @@ Prompt:
 ![](https://github.com/peijia0809/MCU-project/blob/main/_posts/cdv_photo_17479310501(1)(1).jpg?raw=true)
 怒:
 <iframe width="315" height="460" src="https://www.youtube.com/embed/LZqWnEe04Is" title="怒" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-哀:<iframe width="315" height="460" src="https://www.youtube.com/embed/0xQjPVIYdNM" title="哀" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+哀:
+<iframe width="315" height="460" src="https://www.youtube.com/embed/0xQjPVIYdNM" title="哀" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 樂:
 <iframe width="315" height="460" src="https://www.youtube.com/embed/3SlPfRxvroo" title="樂" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
