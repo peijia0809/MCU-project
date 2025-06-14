@@ -12,7 +12,7 @@ This project combines AI and imaging to create Navigation system for the blind.
 ## Navigation system for the blind
 
 ### EdgeAI MCU System Diagram
-![]()
+![](https://github.com/peijia0809/MCU-project/blob/main/_posts/%E7%9B%B2%E4%BA%BA%E5%B0%8E%E8%88%AA.jpg?raw=true)
 
 
 ### Introduciton of EdgeAI MCU Application projects 
